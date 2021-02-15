@@ -101,4 +101,21 @@ public class Player : NetworkBehaviour
 			ChangeColor(msg.vector);
 		}
 	}
+
+	void Update()
+	{
+		syncVar++;
+	}
+
+	[SyncVar] ulong syncVar;
+
+	public override bool OnSerialize(NetworkWriter writer, bool initialState)
+	{
+		Debug.Log("serialize");
+		return true;
+	}
+	public override void OnDeserialize(NetworkReader reader, bool initialState)
+	{
+		Debug.Log("deserialize");
+	}
 }
